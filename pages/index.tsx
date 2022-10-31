@@ -2,6 +2,7 @@ import React from "react";
 import AxiosTest from "./axios";
 import Comma from "./comma";
 import MultipleSelect from "./multipleSelect";
+import Select from "./selectBox";
 
 type Props = {};
 
@@ -14,6 +15,8 @@ const index = (props: Props) => {
       {/* <Comma /> */}
       {/* axios 모듈화 연습 with react-query */}
       {/* <AxiosTest /> */}
+      {/* select Box custom */}
+      <Select />
     </div>
   );
 };
