@@ -32,7 +32,6 @@ instance.interceptors.request.use((config) => {
   if (token !== null) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-
   return config;
 });
 
@@ -42,7 +41,7 @@ const getRfreshToken = async (): Promise<string | void> => {
     //   data: { ACCESS_TOKEN, REFRESH_TOKEN },
     // } = await axios.get<{ ACCESS_TOKEN: string; REFRESH_TOKEN: string | null }>(
     //   REFRESH_URL
-    // );
+    // )
 
     const data = await axios.post(REFRESH_URL, {
       accessToken:
