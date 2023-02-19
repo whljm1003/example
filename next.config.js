@@ -2,6 +2,15 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
+  env: {
+    BASE_URL: process.env.BASE_URL,
+  },
 
-module.exports = nextConfig
+  async rewrites() {
+    return [
+      { source: "/:path*", destination: `https://test-api.entizen.kr/:path*` },
+    ];
+  },
+};
+
+module.exports = nextConfig;

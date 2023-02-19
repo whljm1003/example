@@ -1,45 +1,29 @@
-import { useQuery } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import axios from "axios";
 import React from "react";
-import { Post, post } from "../api";
+import { useMutation, useQuery } from "react-query";
+import instance from "../api";
 
-type Props = {};
-
-const AxiosTest = (props: Props) => {
-  const { data, isLoading, isError, error } = useQuery<Post, AxiosError>(
-    ["test123"],
-    () => post("get", "/users?page=2"),
+export default function reactQueryTest() {
+  const { data } = useQuery(
+    "result",
+    () => instance.get("/members/info"),
+    // () => axios.get("/api/members?id=test1&memberType=COMPANY"),
     {
-      onError: (error) => {
-        console.log(error.request.data);
-        console.log(error.response?.status);
-      },
+      retry: 1,
     }
   );
 
-  console.log(data);
+  // const { mutate } = useMutation(
+  //   () => instance.post("/post", { data: data }),
+  //   {}
+  // );
 
-  if (isLoading) {
-    return <div>로딩중...</div>;
-  }
-
-  if (isError) {
-    // console.log("에러 메세지");
-    // console.log(error);
-    // console.log(isError);
-    // return <div>{isError.message}</div>;
-    // alert(error);
-    return <h1>에러</h1>;
-  }
+  // console.log(`⭐️ line: 32, ⭐️ result: ${data}`);
+  // console.log(data);
 
   return (
     <div>
-      <h1>{data.page}</h1>
-      <h1>{data.per_page}</h1>
-      <h1>{data.total}</h1>
-      <h1>{data.total_pages}</h1>
+      <h1>데이터</h1>
     </div>
   );
-};
-
-export default AxiosTest;
+}
